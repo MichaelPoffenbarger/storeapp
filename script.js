@@ -1,71 +1,215 @@
-let currentPage = 1; // Track the current page
-const productsPerPage = 10; // Number of products per page
-
-const populateStore = () => {
-    // Create 10 test products
+$(document).ready(function() {
     const products = [
-        { id: 1, name: 'Product 1', price: 9.99, description: 'This is product 1' },
-        { id: 2, name: 'Product 2', price: 19.99, description: 'This is product 2' },
-        { id: 3, name: 'Product 3', price: 29.99, description: 'This is product 3' },
-        { id: 4, name: 'Product 4', price: 39.99, description: 'This is product 4' },
-        { id: 5, name: 'Product 5', price: 49.99, description: 'This is product 5' },
-        { id: 6, name: 'Product 6', price: 59.99, description: 'This is product 6' },
-        { id: 7, name: 'Product 7', price: 69.99, description: 'This is product 7' },
-        { id: 8, name: 'Product 8', price: 79.99, description: 'This is product 8' },
-        { id: 9, name: 'Product 9', price: 89.99, description: 'This is product 9' },
-        { id: 10, name: 'Product 10', price: 99.99, description: 'This is product 10' },
-        { id: 11, name: 'Product 11', price: 109.99, description: 'This is product 11' },
-        { id: 12, name: 'Product 12', price: 119.99, description: 'This is product 12' },
-        { id: 13, name: 'Product 13', price: 129.99, description: 'This is product 13' },
-        { id: 14, name: 'Product 14', price: 139.99, description: 'This is product 14' },
-        { id: 15, name: 'Product 15', price: 149.99, description: 'This is product 15' },
-        { id: 16, name: 'Product 16', price: 159.99, description: 'This is product 16' },
-        { id: 17, name: 'Product 17', price: 169.99, description: 'This is product 17' },
-        { id: 18, name: 'Product 18', price: 179.99, description: 'This is product 18' },
-        { id: 19, name: 'Product 19', price: 189.99, description: 'This is product 19' },
-        { id: 20, name: 'Product 20', price: 199.99, description: 'This is product 20' }
+        {
+            name: "Sleek Wireless Headphones",
+            description: "Experience crystal-clear audio with our premium wireless headphones.",
+            price: 199.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/headphones-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Powerful Gaming Laptop",
+            description: "Unleash your gaming potential with our high-performance laptop.",
+            price: 999.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/laptop-gaming-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Smart Fitness Watch",
+            description: "Track your fitness goals with our advanced smartwatch.",
+            price: 149.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/watch-fitness-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "High-Speed Router",
+            description: "Experience fast and reliable internet connectivity with our high-speed router.",
+            price: 79.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/router-speed-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Wireless Charging Pad",
+            description: "Conveniently charge your devices wirelessly with our sleek charging pad.",
+            price: 29.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/pad-charging-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Portable Power Bank",
+            description: "Stay powered on-the-go with our compact power bank.",
+            price: 49.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/bank-power-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Noise-Cancelling Earbuds",
+            description: "Immerse yourself in pure sound with our noise-cancelling earbuds.",
+            price: 99.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/earbuds-noise-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Gaming Mouse",
+            description: "Elevate your gaming experience with our precision gaming mouse.",
+            price: 69.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/mouse-gaming-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "4K Smart TV",
+            description: "Experience cinematic quality at home with our 4K smart TV.",
+            price: 499.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/tv-smart-4k-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "High-Tech Smartphone",
+            description: "Stay connected with our cutting-edge smartphone technology.",
+            price: 599.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/phone-tech-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Advanced DSLR Camera",
+            description: "Capture life's moments with our professional-grade DSLR camera.",
+            price: 899.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/camera-dslr-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Premium Soundbar",
+            description: "Enhance your home theater experience with our premium soundbar.",
+            price: 299.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/soundbar-premium-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Gaming Keyboard",
+            description: "Dominate your opponents with our customizable gaming keyboard.",
+            price: 129.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/keyboard-gaming-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Virtual Reality Headset",
+            description: "Step into new worlds with our immersive virtual reality headset.",
+            price: 399.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/headset-vr-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Smart Speaker",
+            description: "Control your home with our intelligent smart speaker.",
+            price: 99.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/speaker-smart-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "High-Speed SSD",
+            description: "Boost your computer's performance with our high-speed SSD.",
+            price: 149.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/ssd-speed-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Wireless Speaker",
+            description: "Enjoy music anywhere with our portable wireless speaker.",
+            price: 79.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/speaker-wireless-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Gaming Chair",
+            description: "Immerse yourself in comfort with our ergonomic gaming chair.",
+            price: 249.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/chair-gaming-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Smart Home Security System",
+            description: "Protect your home with our advanced smart security system.",
+            price: 299.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/system-security-smart-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "4K Action Camera",
+            description: "Capture life's adventures with our rugged 4K action camera.",
+            price: 199.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/camera-action-4k-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Smart Thermostat",
+            description: "Control your home's temperature with our smart thermostat.",
+            price: 129.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/thermostat-smart-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "High-End Graphics Card",
+            description: "Unleash your computer's graphics potential with our high-end graphics card.",
+            price: 499.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/card-graphics-end-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Portable SSD",
+            description: "Store and transfer data quickly with our portable SSD.",
+            price: 99.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/ssd-portable-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        },
+        {
+            name: "Gaming Monitor",
+            description: "Experience fast and smooth gaming with our high-performance monitor.",
+            price: 399.99,
+            image: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/monitor-gaming-2XWPB1a0ZzCVBvvxbxwGnRLtQGwLLt.jpg"
+        }
     ];
 
-    const totalPages = Math.ceil(products.length / productsPerPage);
-    const startIndex = (currentPage - 1) * productsPerPage;
-    const endIndex = startIndex + productsPerPage;
-    const productsToDisplay = products.slice(startIndex, endIndex);
+    const itemsPerPage = 10; // Number of items per page
+    let currentPage = 1; // Current page number
+    let filteredProducts = products; // Array to hold filtered products
 
-    const productsSection = document.getElementById('products');
-    productsSection.innerHTML = ''; // Clear previous products
-    productsToDisplay.forEach(product => {
-        const productHTML = `
-        
-            <div class="card text-center" style="border: 1px solid #000000; margin: 10px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: #000;">
-                <h5 class="card-title" style="color: #fff; font-weight: bold;">${product.name}</h5>
-                <p class="card-text" style="color: #fff;">${product.description}</p>
-                <p class="card-text" style="color: #fff; font-weight: bold;">Price: $${product.price}</p>
-            </div>
-            
-        `;
-        productsSection.innerHTML += productHTML;
-    });
+    // Function to display products
+    function displayProducts() {
+        const start = (currentPage - 1) * itemsPerPage; // Calculate start index
+        const end = start + itemsPerPage; // Calculate end index
+        const paginatedProducts = filteredProducts.slice(start, end); // Get products for the current page
 
-    // Update pagination buttons
-    updatePaginationButtons(totalPages);
-}
+        $('#product-container').empty(); // Clear previous products
 
-const updatePaginationButtons = (totalPages) => {
-    const paginationSection = document.getElementById('pagination');
-    paginationSection.innerHTML = `
-        <button onclick="changePage(-1)" ${currentPage === 1 ? 'disabled' : ''}>Previous</button>
-        <span>Page ${currentPage} of ${totalPages}</span>
-        <button onclick="changePage(1)" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>
-    `;
-}
+        paginatedProducts.forEach((product, index) => { // Loop through paginated products
+            const productCard = $('<div>').addClass('product-card');
+            const productImage = $('<div>').addClass('product-image').css('background-image', `url(${product.image})`);
+            const productOverlay = $('<div>').addClass('product-overlay');
+            const viewDetailsButton = $('<a>').addClass('view-details').text('View Details').attr('href', `#product-${start + index}`); // Adjusted index for correct href
+            const productInfo = $('<div>').addClass('product-info');
+            const productName = $('<h2>').addClass('product-name').text(product.name);
+            const productDescription = $('<p>').addClass('product-description').text(product.description);
+            const productPrice = $('<p>').addClass('product-price').text(`$${product.price.toFixed(2)}`);
 
-const changePage = (direction) => {
-    currentPage += direction;
-    populateStore();
-}
+            productOverlay.append(viewDetailsButton);
+            productImage.append(productOverlay);
+            productInfo.append(productName, productDescription, productPrice);
+            productCard.append(productImage, productInfo);
 
-populateStore();
+            $('#product-container').append(productCard); // Append product card to container
+        });
+    }
 
+    // Function to update pagination
+    function updatePagination() {
+        const totalPages = Math.ceil(filteredProducts.length / itemsPerPage); // Calculate total pages
+        let pagination = '';
 
+        for (let i = 1; i <= totalPages; i++) {
+            pagination += `<button class="pagination-button" data-page="${i}">${i}</button>`; // Create pagination buttons with data attributes
+        }
 
+        $('#pagination').html(pagination); // Update pagination HTML
 
+        // Attach click event to pagination buttons
+        $('.pagination-button').on('click', function() {
+            currentPage = $(this).data('page'); // Get the page number from the button's data attribute
+            displayProducts(); // Refresh the displayed products
+        });
+    }
+
+    // Function to filter products based on search input
+    function searchProducts() {
+        const searchQuery = $('#search-input').val().toLowerCase(); // Get the search query
+        filteredProducts = products.filter(product => {
+            return product.name.toLowerCase().includes(searchQuery) || // Search by name
+                   product.description.toLowerCase().includes(searchQuery); // Search by description
+        });
+        currentPage = 1; // Reset to the first page
+        displayProducts(); // Display filtered products
+        updatePagination(); // Update pagination based on filtered products
+    }
+
+    // Event listener for search input
+    $('#search-input').on('input', searchProducts); // Call searchProducts on input change
+
+    displayProducts(); // Initial display of products
+    updatePagination(); // Initial update of pagination
+});
